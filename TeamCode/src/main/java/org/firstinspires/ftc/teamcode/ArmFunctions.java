@@ -36,7 +36,7 @@ public class ArmFunctions {
             armMotor.setTargetPosition(0);
             armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             armMotor.setPower(0.5);
-            armRotServo.setPosition(0.5); // down
+            armRotServo.setPosition(0.45); // down
         } else if (GP2LS) {
             armMotor.setTargetPosition(1150);
             armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
