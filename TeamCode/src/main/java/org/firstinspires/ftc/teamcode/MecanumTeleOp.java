@@ -3,17 +3,20 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-@TeleOp(name="TeleOp", group="Testing")
+@TeleOp(name="RoberriPi", group="TeleOp")
 public class MecanumTeleOp extends OpMode {
     private RobotHardware robot;
+    private ArmFunctions functions;
     @Override
     public void init() {
         robot = new RobotHardware(hardwareMap);
+        functions = new ArmFunctions(hardwareMap);
     }
 
     boolean isButtonA = false;
     public double speedMult;
     @Override
+
     public void loop() {
 
         double forward = -gamepad1.left_stick_y;
@@ -28,14 +31,14 @@ public class MecanumTeleOp extends OpMode {
         } else {
             isButtonA = false;
         }
+        functions.setup(gamepad1.start);
         robot.setMotorPowers(strafe, forward, rotation * 0.8);
-        robot.arm(gamepad1.x, gamepad1.b);
-        robot.armMotor(gamepad1.left_bumper, gamepad1.right_bumper, gamepad1.left_stick_button, gamepad1.right_stick_button);
-        telemetry.addData("clawPos", robot.clawPos);
-        telemetry.addData("armMotorPos", robot.armMotorPos);
-        telemetry.addData("Encoder Revolutions", robot.armrevolutions);
-        telemetry.addData("Encoder Angle (Degrees)", robot.armangle);
-        telemetry.addData("Encoder Angle - Normalized (Degrees)", robot.armangleNormalized);
+        functions.claw(gamepad2.x, gamepad2.b);
+        functions.clawRot(gamepad1.x, gamepad1.b);
+        functions.armMotor(gamepad2.right_stick_button, gamepad2.left_stick_button);
+        telemetry.addData("clawPos", functions.clawPos);
+        telemetry.addData("clawRotPos", functions.clawRotPos);
+        telemetry.addData("armMotorPos", functions.armMotorPos);
         telemetry.update();
     }
 }

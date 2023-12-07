@@ -1,13 +1,10 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorController;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 public class ArmFunctions {
-    private DcMotor leftFront, leftRear, rightFront, rightRear;
     private DcMotorEx armMotor;
     private Servo armRotServo, clawServo;
     public ArmFunctions(HardwareMap hardwareMap) {
@@ -17,52 +14,44 @@ public class ArmFunctions {
         armRotServo = hardwareMap.get(Servo.class, "armRotServo");
         clawServo = hardwareMap.get(Servo.class, "clawServo");
     }
-    double speedMult = 1;
     double clawPos;
+    double clawRotPos;
     int armMotorPos;
-    double armangleNormalized;
-    double armangle;
-    double armrevolutions;
-    public void toggleSpeed() {
-        if (speedMult == 1) {
-            speedMult = 0.62;
-        }
-        else {
-            speedMult = 1;
+    public void setup(boolean gp1start) {
+        if (gp1start) {
+            armRotServo.setPosition(0.45);
         }
     }
-    public void arm(boolean gamepad1x, boolean gamepad1b) {
+
+    public void clawRot(boolean gamepad1x, boolean gamepad1b) {
         if (gamepad1x) {
-            armRotServo.setPosition(0 /* 0 degrees */);
+            armRotServo.setPosition(0.45 /* 0 degrees */); // down
         } else if (gamepad1b) {
-            armRotServo.setPosition(1 /* 180 degrees */);
+            armRotServo.setPosition(0.8 /* 180 degrees */); // up
         }
+        clawRotPos = armRotServo.getPosition();
     }
-    public void armMotor(boolean gamepadLBUMP, boolean gamepadRBUMP, boolean gamepadLSBUTTON, boolean gamepadRSBUTTON) {
-        /*if (gamepadLBUMP) {
-            armMotor.setTargetPosition(-10);
+    public void armMotor(boolean GP2RS, boolean GP2LS) {
+        if (GP2RS) {
+            armMotor.setTargetPosition(0);
             armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            armMotor.setPower(0.1);
-        } else if (gamepadRBUMP) {
-            armMotor.setTargetPosition(100);
+            armMotor.setPower(0.5);
+            armRotServo.setPosition(0.5); // down
+        } else if (GP2LS) {
+            armMotor.setTargetPosition(1150);
             armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            armMotor.setPower(0.1);
-        }*/
+            armMotor.setPower(0.5);
+            armRotServo.setPosition(0.8); // up
+        }
         armMotorPos = armMotor.getCurrentPosition();
-        double CPR = 2786;
-
-        // Get the current position of the motor
-        int position = armMotor.getCurrentPosition();
-        armrevolutions = position/CPR;
-
-        armangle = armrevolutions * 360;
-        armangleNormalized = armangle % 360;
-        /*if (gamepadLBUMP) {
-            clawServo.setPosition(0);
-        } else if (gamepadRBUMP) {
-            clawServo.setPosition(180);
-        }
-        clawPos = clawServo.getPosition();*/
     }
-
+    public void claw(boolean gamepad2x, boolean gamepad2b) {
+        clawPos = clawServo.getPosition();
+        if (gamepad2x) {
+            clawServo.setPosition(0.25); // open
+        } else if (gamepad2b) {
+            clawServo.setPosition(0.5); // close
+        }
+        clawPos = clawServo.getPosition();
+    }
 }
