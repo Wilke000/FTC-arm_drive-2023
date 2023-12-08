@@ -1,28 +1,37 @@
 package org.firstinspires.ftc.teamcode;
 
+import static java.lang.Thread.sleep;
+
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 public class ArmFunctions {
     private DcMotorEx armMotor;
-    private Servo armRotServo, clawServo;
+    private Servo armRotServo, clawServo, planeLauncher;
     public ArmFunctions(HardwareMap hardwareMap) {
         armMotor = hardwareMap.get(DcMotorEx.class, "armMotor");
         armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         armMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         armRotServo = hardwareMap.get(Servo.class, "armRotServo");
         clawServo = hardwareMap.get(Servo.class, "clawServo");
+        planeLauncher = hardwareMap.get(Servo.class, "planeLauncher");
     }
     double clawPos;
     double clawRotPos;
     int armMotorPos;
+    double PLpos;
     public void setup(boolean gp1start) {
         if (gp1start) {
             armRotServo.setPosition(0.45);
         }
     }
-
+    public void planeLaunch(boolean GP2LB, boolean GP2RB) {
+        PLpos = planeLauncher.getPosition();
+        if (GP2LB == GP2RB) {
+            planeLauncher.setPosition(0 /* fix later */);
+        }
+    }
     public void clawRot(boolean gamepad1x, boolean gamepad1b) {
         if (gamepad1x) {
             armRotServo.setPosition(0.45 /* 0 degrees */); // down

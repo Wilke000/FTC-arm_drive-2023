@@ -22,7 +22,6 @@ public class MecanumTeleOp extends OpMode {
         double forward = -gamepad1.left_stick_y;
         double strafe = gamepad1.left_stick_x;
         double rotation = gamepad1.right_stick_x;
-        /* double armRotation; */
         if (gamepad1.a) {
             if(!isButtonA) {
                 robot.toggleSpeed();
@@ -36,6 +35,8 @@ public class MecanumTeleOp extends OpMode {
         functions.claw(gamepad2.x, gamepad2.b);
         functions.clawRot(gamepad1.x, gamepad1.b);
         functions.armMotor(gamepad2.right_stick_button, gamepad2.left_stick_button);
+        functions.planeLaunch(gamepad2.left_bumper, gamepad2.right_bumper);
+        telemetry.addData("PlaneServoPos", functions.PLpos);
         telemetry.addData("clawPos", functions.clawPos);
         telemetry.addData("clawRotPos", functions.clawRotPos);
         telemetry.addData("armMotorPos", functions.armMotorPos);

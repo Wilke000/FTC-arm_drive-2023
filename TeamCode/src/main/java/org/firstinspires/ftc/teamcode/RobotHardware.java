@@ -1,15 +1,10 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorController;
-import com.qualcomm.robotcore.hardware.DcMotorEx;
-import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 public class RobotHardware {
     private DcMotor leftFront, leftRear, rightFront, rightRear;
-    private DcMotorEx armMotor;
-    private Servo armRotServo, clawServo;
 
     public RobotHardware(HardwareMap hardwareMap) {
         // Wheels
@@ -19,9 +14,6 @@ public class RobotHardware {
         rightRear = hardwareMap.get(DcMotor.class, "rightRear");
         rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
         leftRear.setDirection(DcMotorSimple.Direction.REVERSE);
-        // Camera
-        // Sensors
-        // arm stuff
     }
 
     double speedMult = 1;

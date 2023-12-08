@@ -2,5 +2,6 @@
 2b = claw open
 2RS = down arm
 2LS = up arm
-1x = rot claw down
-1b = rot claw up
+1x = rot claw for down
+1b = rot claw for up
+2LB + 2RB = Launch Plane
