@@ -22,11 +22,6 @@ public class RobotHardware {
         // Camera
         // Sensors
         // arm stuff
-        armMotor = hardwareMap.get(DcMotorEx.class, "armMotor");
-        armMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        armMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        armRotServo = hardwareMap.get(Servo.class, "armRotServo");
-        clawServo = hardwareMap.get(Servo.class, "clawServo");
     }
 
     double speedMult = 1;
