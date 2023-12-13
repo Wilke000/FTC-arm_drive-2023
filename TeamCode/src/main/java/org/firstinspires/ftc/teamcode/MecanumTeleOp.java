@@ -32,7 +32,7 @@ public class MecanumTeleOp extends OpMode {
         }
         functions.setup(gamepad1.start);
         robot.setMotorPowers(strafe, forward, rotation * 0.8);
-        functions.claw(gamepad2.x, gamepad2.b, gamepad2.back);
+        functions.claw(gamepad2.x, gamepad2.b);
         functions.clawRot(gamepad1.x, gamepad1.b);
         functions.armMotor(gamepad2.right_stick_button, gamepad2.left_stick_button);
         functions.planeLaunch(gamepad2.start, gamepad2.left_bumper, gamepad2.right_bumper);

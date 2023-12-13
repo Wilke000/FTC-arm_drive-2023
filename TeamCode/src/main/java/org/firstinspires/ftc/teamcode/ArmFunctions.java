@@ -23,7 +23,7 @@ public class ArmFunctions {
     double PLpos;
     public void setup(boolean gp1start) {
         if (gp1start) {
-            armRotServo.setPosition(0.5);
+            armRotServo.setPosition(0.486);
         }
     }
 
@@ -38,9 +38,9 @@ public class ArmFunctions {
 
     public void clawRot(boolean gamepad1x, boolean gamepad1b) {
         if (gamepad1x) {
-            armRotServo.setPosition(0.5 /* 0 degrees */); // down
+            armRotServo.setPosition(0.486 /* 0 degrees */); // down
         } else if (gamepad1b) {
-            armRotServo.setPosition(0.8 /* 180 degrees */); // up
+            armRotServo.setPosition(0.9 /* 180 degrees */); // up
         }
         clawRotPos = armRotServo.getPosition();
     }
@@ -49,21 +49,21 @@ public class ArmFunctions {
             armMotor.setTargetPosition(0);
             armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             armMotor.setPower(0.3);
-            armRotServo.setPosition(0.5); // down
+            armRotServo.setPosition(0.486); // down
         } else if (GP2LS) {
             armMotor.setTargetPosition(1150);
             armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             armMotor.setPower(0.3);
-            armRotServo.setPosition(0.8); // up
+            armRotServo.setPosition(0.9); // up
         }
         armMotorPos = armMotor.getCurrentPosition();
     }
-    public void claw(boolean gamepad2x, boolean gamepad2b, boolean gp2back) {
+    public void claw(boolean gamepad2x, boolean gamepad2b) {
         clawPos = clawServo.getPosition();
         if (gamepad2x) {
-            clawServo.setPosition(0.3); // close
+            clawServo.setPosition(0.27); // close - 0.3
         } else if (gamepad2b) {
-            clawServo.setPosition(0.1); // open
+            clawServo.setPosition(0.1); // open - 0.1
         }
         clawPos = clawServo.getPosition();
     }
